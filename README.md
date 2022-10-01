@@ -95,3 +95,35 @@ To get list of keys
 To delete a field from hashlist
 
     HDEL user:123 username
+
+## Lists
+
+Redis stores lists as linked list, and track the head/tail of it, so we can push either on left or right, althout there is way to insert into a given index but its performance is O(n).
+
+    RPUSH playlist 100
+
+At the beginning
+
+    LPUSH playlist 100
+
+top `pop` an element use
+
+    LPOP playlist
+    
+    RPOP playlist
+
+to get a range:
+
+    LRANGE playlist 0 3
+
+to get the length of the list:
+
+    LLEN playlist
+
+To get an element by index
+
+    LINDEX playlist 3
+
+### Can we move a list to another?
+
+the answer is yes, we can use the `MOVE` command to move a list **atomically** to another.
