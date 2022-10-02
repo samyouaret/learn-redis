@@ -98,7 +98,7 @@ To delete a field from hashlist
 
 ## Lists
 
-Redis stores lists as linked list, and track the head/tail of it, so we can push either on left or right, althout there is way to insert into a given index but its performance is O(n).
+Redis stores lists as linked list, and track the head/tail of it. It cloud contains only string elements. we can push either on left or right, althout there is way to insert into a given index but its performance is O(n).
 
     RPUSH playlist 100
 
@@ -127,3 +127,42 @@ To get an element by index
 ### Can we move a list to another?
 
 the answer is yes, we can use the `MOVE` command to move a list **atomically** to another.
+
+## Sets
+
+SET is unordered collection
+
+    SADD online-users 1002
+
+To check an item if it is a memeber:
+
+    SISMEMBER online-users 1001
+
+To get all members(not in production)
+
+    SMEMBERS online-users
+
+To get length(cardinality) of a set:
+
+    SCARD online-users
+
+Use `SSCAN` to iteratively read members
+
+     SSCAN online-users 0  match 100*
+
+To remove an element from list.
+
+     SREM online-users 1001
+
+to pop randomly a subset of elements
+
+     SPOP online-users 2
+
+### Set intersction/diffrence
+
+to get intersection/diff  between two sets. note that intersection return the items present in first set and not in other sets.
+
+    SINTER odd prime
+
+    SDIFF odd prime
+
